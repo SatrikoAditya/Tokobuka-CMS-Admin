@@ -1,9 +1,9 @@
 <template>
     <div>
-        <button v-b-modal.modal-prevent-update class="btn btn-success btn-sm rounded" style="float: right; margin-right: 15px;" type="button">Edit</button>
+        <button v-b-modal.modal-prevent-update class="btn btn-primary btn-sm rounded" style="float: right; margin-right: 15px;" type="button">Edit</button>
         <b-modal
         id="modal-prevent-update"
-        title="Add New Product"
+        title="Update Product"
         @ok="handleOk"
         ref="my-modal">
         <form ref="form" @submit.prevent="handleSubmit">
@@ -60,7 +60,38 @@
 
 <script>
 export default {
-
+    name: 'ModalUpdate',
+    data () {
+        return {
+            name: this.product.name,
+            image_url: this.product.image_url,
+            price: this.product.price,
+            stock: this.product.stock,
+            id: this.product.id
+        }
+    },
+    methods: {
+        handleOk (bvModalEvt) {
+            // Prevent modal from closing
+            bvModalEvt.preventDefault()
+            // Trigger submit handler
+            this.handleSubmit()
+        },
+        handleSubmit () {
+            this.$emit('updateProduct', {
+                id: this.id,
+                name: this.name,
+                image_url: this.image_url,
+                price: this.price,
+                stock: this.stock
+            })
+            this.$nextTick(() => {
+                this.$bvModal.hide('modal-prevent-update')
+            })
+        }
+    },
+    props: ['product']
+    
 }
 </script>
 

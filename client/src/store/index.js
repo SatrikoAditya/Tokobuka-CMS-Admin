@@ -22,7 +22,6 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data, '<<<<<<<<<<<<< ini dataaaaaaa')
           commit('setProducts', data.data)
         })
         .catch(err => {
@@ -57,7 +56,6 @@ export default new Vuex.Store({
         })
     },
     deleteProduct (context, id) {
-      console.log(id, '<<<<<<<<<<<<<<<<<<<<<<<< ini id')
       axios.delete(`http://localhost:3000/product/${id}`, {
         headers: {
           token: localStorage.token
@@ -69,6 +67,26 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    updateProduct (context, payload) {
+      const { id, name, image_url, price, stock } = payload
+      axios.put(`http://localhost:3000/product/${id}`, {
+        name, image_url, price, stock
+      }, {
+        headers: {
+          token: localStorage.token
+        }
+      })
+      .then(data => {
+        console.log(data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },
+    logout () {
+      localStorage.clear
+      router.push({ name: 'Login' })
     }
   },
   modules: {

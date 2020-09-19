@@ -3,7 +3,7 @@
         <nav class="navbar navbar-dark bg-light">
             <img src="../assets/ecommerce-logo.png" width="120px">
             <li class="nav navbar-nav ml-auto">
-                <a class="btn btn-danger" role="button" href="#">Logout</a>
+                <a class="btn btn-danger" role="button" @click.prevent="logout">Logout</a>
             </li>
         </nav>
         <div class="container">
@@ -14,7 +14,7 @@
                       <ModalAdd @addProduct="addProduct"/>
                   </h4>
                   <ul id="todo-container" class="list-unstyled" style="overflow-y: auto; height: 500px;">
-                    <ProductList :products="products" @deleteProduct="deleteProduct" />
+                    <ProductList v-for="product in products" :key="product.id" :product="product" @updateProduct="updateProduct" :products="products" @deleteProduct="deleteProduct" />
                   </ul>
                 </div>
               </div>
@@ -46,8 +46,13 @@ export default {
       this.$store.dispatch('addProduct', payload)
     },
     deleteProduct (id) {
-      console.log(id, '<<<<<<<<<<<<<<<, ini id di home')
       this.$store.dispatch('deleteProduct', id)
+    },
+    updateProduct (payload) {
+      this.$store.dispatch('updateProduct', payload)
+    },
+    logout () {
+      this.$store.dispatch('logout')
     }
   },
   created () {
