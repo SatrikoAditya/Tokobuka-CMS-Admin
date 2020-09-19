@@ -1,11 +1,11 @@
 <template>
     <div>
-        <button v-b-modal.modal-prevent-update class="btn btn-primary btn-sm rounded" style="float: right; margin-right: 15px;" type="button">Edit</button>
+        <button v-b-modal="'product-' + product.id" class="btn btn-success btn-sm rounded" style="float: right; margin-right: 15px;" type="button">Edit</button>
         <b-modal
-        id="modal-prevent-update"
+        :id="'product-' + product.id"
         title="Update Product"
         @ok="handleOk"
-        ref="my-modal">
+        ref="modal-update">
         <form ref="form" @submit.prevent="handleSubmit">
         <b-form-group
             label="Name"
@@ -86,12 +86,11 @@ export default {
                 stock: this.stock
             })
             this.$nextTick(() => {
-                this.$bvModal.hide('modal-prevent-update')
+                this.$bvModal.hide('product-' + this.product.id)
             })
         }
     },
     props: ['product']
-    
 }
 </script>
 

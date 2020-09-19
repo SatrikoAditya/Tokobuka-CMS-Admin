@@ -10,10 +10,10 @@
             <div class="row pt-5">
                 <div class="col-8">
                   <h4>
-                      <b>All Product</b>
-                      <ModalAdd @addProduct="addProduct"/>
+                    <ModalAdd @addProduct="addProduct"/>
+                    <div><b>All Product</b></div>
                   </h4>
-                  <ul id="todo-container" class="list-unstyled" style="overflow-y: auto; height: 500px;">
+                  <ul id="container" class="list-unstyled" style="overflow-y: auto; height: 510px;">
                     <ProductList v-for="product in products" :key="product.id" :product="product" @updateProduct="updateProduct" :products="products" @deleteProduct="deleteProduct" />
                   </ul>
                 </div>

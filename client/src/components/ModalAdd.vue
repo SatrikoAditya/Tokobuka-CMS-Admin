@@ -86,6 +86,10 @@ export default {
       this.$nextTick(() => {
         this.$bvModal.hide('modal-prevent-closing')
       })
+      this.name = '',
+      this.image_url = '',
+      this.price = '',
+      this.stock = ''
     }
   }
 }
